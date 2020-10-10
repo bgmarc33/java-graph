@@ -10,7 +10,7 @@ public class Graph {
     private final ArrayList<LinkedList<Edge>> adjacencyList;
 
     public Graph() {
-        this(false);
+        this(true);
     }
 
     public Graph(boolean biDirectional) {
