@@ -43,7 +43,7 @@ public class GraphSpec {
 
     @Test
     public void testAddEdge() throws GraphException {
-        Graph graph = new Graph();
+        Graph graph = new Graph(false);
         Vertex v1 = new Vertex("newyork");
         Vertex v2 = new Vertex("sanfran");
 
@@ -61,7 +61,7 @@ public class GraphSpec {
 
     @Test
     public void testAddEdgeBidirection() throws GraphException {
-        Graph graph = new Graph(true);
+        Graph graph = new Graph();
         Vertex v1 = new Vertex("newyork");
         Vertex v2 = new Vertex("sanfran");
 
