@@ -15,13 +15,13 @@ public class GraphSpec {
         graph.addVertex(v1);
 
         Assert.assertEquals(1, graph.getVertices().size());
-        Assert.assertTrue(graph.getVertices().contains(v1.getVertexId()));
+        Assert.assertTrue(graph.getVertices().contains(v1.getVertexName()));
 
         Vertex v2 = new Vertex("sanfran");
         graph.addVertex(v2);
 
         Assert.assertEquals(2, graph.getVertices().size());
-        Assert.assertTrue(graph.getVertices().contains(v2.getVertexId()));
+        Assert.assertTrue(graph.getVertices().contains(v2.getVertexName()));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class GraphSpec {
         graph.removeVertex(v1);
 
         Assert.assertEquals(1, graph.getVertices().size());
-        Assert.assertTrue(graph.getVertices().contains(v2.getVertexId()));
+        Assert.assertTrue(graph.getVertices().contains(v2.getVertexName()));
     }
 
     @Test

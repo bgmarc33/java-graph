@@ -5,21 +5,19 @@ import exception.VertexException;
 import java.util.HashMap;
 
 public class Vertex {
-    private final String vertexId;
+    private static Long id = 0L;
+
+    private final Long vertexId;
     private final String vertexName;
     private final HashMap<String, Object> vertexMetadata;
 
     public Vertex(String name) {
-        this(String.format("id-%s", name.toLowerCase()), name);
-    }
-
-    public Vertex(String id, String name) {
-        this.vertexId = id;
+        this.vertexId = id++;
         this.vertexName = name;
         this.vertexMetadata = new HashMap<>();
     }
 
-    public String getVertexId() {
+    public Long getVertexId() {
         return this.vertexId;
     }
 
