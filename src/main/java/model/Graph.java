@@ -32,18 +32,18 @@ public class Graph {
     }
 
     public void addVertex(Vertex vertex) throws GraphException {
-        if (vertexToIndexMap.containsKey(vertex.getVertexName())) {
+        if (vertexToIndexMap.containsKey(vertex._getNormalizedVertexName())) {
             throw new GraphException("Duplicate vertex name");
         }
 
-        this.vertexToIndexMap.put(vertex.getVertexName(), (long) this.adjacencyList.size());
+        this.vertexToIndexMap.put(vertex._getNormalizedVertexName(), (long) this.adjacencyList.size());
         this.adjacencyList.add(new LinkedList<>());
     }
 
     public void removeVertex(Vertex vertex) {
-        if (vertexToIndexMap.containsKey(vertex.getVertexName())) {
-            long index = this.vertexToIndexMap.get(vertex.getVertexName());
-            this.vertexToIndexMap.remove(vertex.getVertexName());
+        if (vertexToIndexMap.containsKey(vertex._getNormalizedVertexName())) {
+            long index = this.vertexToIndexMap.get(vertex._getNormalizedVertexName());
+            this.vertexToIndexMap.remove(vertex._getNormalizedVertexName());
 
             this.adjacencyList.remove((int) index);
         }
@@ -54,40 +54,40 @@ public class Graph {
     }
 
     public void addEdge(Vertex vertex1, Vertex vertex2, Long weight) throws GraphException {
-        if (!vertexToIndexMap.containsKey(vertex1.getVertexName()) ||
-                !vertexToIndexMap.containsKey(vertex2.getVertexName())) {
+        if (!vertexToIndexMap.containsKey(vertex1._getNormalizedVertexName()) ||
+                !vertexToIndexMap.containsKey(vertex2._getNormalizedVertexName())) {
             throw new GraphException("Unable to add edge on non-existing vertex");
         }
 
         LinkedList<Edge> edgesOnVertex1 =
-                this.adjacencyList.get(this.vertexToIndexMap.get(vertex1.getVertexName()).intValue());
+                this.adjacencyList.get(this.vertexToIndexMap.get(vertex1._getNormalizedVertexName()).intValue());
         Optional<Edge> existingVertexEdge = edgesOnVertex1
                 .stream().filter(e -> (e.getConnectingVertex().equals(vertex2.getVertexId()))).findAny();
         if (existingVertexEdge.isEmpty()) {
             edgesOnVertex1.add(new Edge(vertex2.getVertexId(), weight));
             if (this.biDirectional) {
                 LinkedList<Edge> edgesOnVertex2 =
-                        this.adjacencyList.get(this.vertexToIndexMap.get(vertex2.getVertexName()).intValue());
+                        this.adjacencyList.get(this.vertexToIndexMap.get(vertex2._getNormalizedVertexName()).intValue());
                 edgesOnVertex2.add(new Edge(vertex1.getVertexId(), weight));
             }
         }
     }
 
     public void removeEdge(Vertex vertex1, Vertex vertex2) throws GraphException {
-        if (!vertexToIndexMap.containsKey(vertex1.getVertexName()) ||
-                !vertexToIndexMap.containsKey(vertex2.getVertexName())) {
+        if (!vertexToIndexMap.containsKey(vertex1._getNormalizedVertexName()) ||
+                !vertexToIndexMap.containsKey(vertex2._getNormalizedVertexName())) {
             throw new GraphException("Unable to remove edge on non-existing vertex");
         }
 
         LinkedList<Edge> edgesOnVertex1 =
-                this.adjacencyList.get(this.vertexToIndexMap.get(vertex1.getVertexName()).intValue());
+                this.adjacencyList.get(this.vertexToIndexMap.get(vertex1._getNormalizedVertexName()).intValue());
         Optional<Edge> existingVertexEdge = edgesOnVertex1
                 .stream().filter(e -> (e.getConnectingVertex().equals(vertex2.getVertexId()))).findAny();
         if (existingVertexEdge.isPresent()) {
             edgesOnVertex1.remove(existingVertexEdge.get());
             if (this.biDirectional) {
                 LinkedList<Edge> edgesOnVertex2 =
-                        this.adjacencyList.get(this.vertexToIndexMap.get(vertex2.getVertexName()).intValue());
+                        this.adjacencyList.get(this.vertexToIndexMap.get(vertex2._getNormalizedVertexName()).intValue());
                 Optional<Edge> existingVertex2Edge = edgesOnVertex2
                         .stream().filter(e -> (e.getConnectingVertex().equals(vertex2.getVertexId()))).findAny();
                 existingVertex2Edge.ifPresent(edgesOnVertex2::remove);

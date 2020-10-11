@@ -11,6 +11,10 @@ public class Vertex {
     private final String vertexName;
     private final HashMap<String, Object> vertexMetadata;
 
+    public Vertex() {
+        this(id.toString());
+    }
+
     public Vertex(String name) {
         this.vertexId = id++;
         this.vertexName = name;
@@ -23,6 +27,10 @@ public class Vertex {
 
     public String getVertexName() {
         return this.vertexName;
+    }
+
+    public String _getNormalizedVertexName() {
+        return this.vertexName.toLowerCase().replace(' ', '_');
     }
 
     public void addDataToVertex(String key, Object value) {

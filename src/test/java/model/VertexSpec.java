@@ -26,5 +26,8 @@ public class VertexSpec {
         Vertex v2 = new Vertex("test");
         Assert.assertEquals(1L, (long) v2.getVertexId());
         Assert.assertEquals("test", v2.getVertexName());
+
+        Vertex v3 = new Vertex("test NAME");
+        Assert.assertEquals("test_name", v3._getNormalizedVertexName());
     }
 }
