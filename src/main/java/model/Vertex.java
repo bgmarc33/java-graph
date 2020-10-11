@@ -5,26 +5,32 @@ import exception.VertexException;
 import java.util.HashMap;
 
 public class Vertex {
-    private final String vertexId;
+    private static Long id = 0L;
+
+    private final Long vertexId;
     private final String vertexName;
     private final HashMap<String, Object> vertexMetadata;
 
-    public Vertex(String name) {
-        this(String.format("id-%s", name.toLowerCase()), name);
+    public Vertex() {
+        this(id.toString());
     }
 
-    public Vertex(String id, String name) {
-        this.vertexId = id;
+    public Vertex(String name) {
+        this.vertexId = id++;
         this.vertexName = name;
         this.vertexMetadata = new HashMap<>();
     }
 
-    public String getVertexId() {
+    public Long getVertexId() {
         return this.vertexId;
     }
 
     public String getVertexName() {
         return this.vertexName;
+    }
+
+    public String _getNormalizedVertexName() {
+        return this.vertexName.toLowerCase().replace(' ', '_');
     }
 
     public void addDataToVertex(String key, Object value) {
