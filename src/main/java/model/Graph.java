@@ -24,11 +24,11 @@ public class Graph {
     }
 
     public List<Edge> getEdges(Vertex vertex) throws GraphException {
-        if (!this.vertexToIndexMap.containsKey(vertex.getVertexName())) {
+        if (!this.vertexToIndexMap.containsKey(vertex._getNormalizedVertexName())) {
             throw new GraphException("Vertex does not exist in graph");
         }
 
-        return this.adjacencyList.get(this.vertexToIndexMap.get(vertex.getVertexName()).intValue());
+        return this.adjacencyList.get(this.vertexToIndexMap.get(vertex._getNormalizedVertexName()).intValue());
     }
 
     public void addVertex(Vertex vertex) throws GraphException {
